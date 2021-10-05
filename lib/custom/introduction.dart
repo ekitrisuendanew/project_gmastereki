@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:project_gmastereki/catatan.dart';
+import 'package:project_gmastereki/menu/notes.dart';
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class _IntroductionState extends State<Introduction> {
 
   void _onIntroEnd(context) {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-        builder: (context)=>const Catatan()
+        builder: (context)=>const Notes()
     ), (route) => false);
   }
 

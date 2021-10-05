@@ -7,16 +7,16 @@ import 'package:http/http.dart' as http;
 import 'package:project_gmastereki/custom/custom_color.dart';
 import 'package:project_gmastereki/network/network.dart';
 
-class AddCatatan extends StatefulWidget {
+class AddNotes extends StatefulWidget {
   final VoidCallback reload;
-  const AddCatatan(this.reload);
+  const AddNotes(this.reload);
   @override
-  _AddCatatanState createState() => _AddCatatanState();
+  _AddNotesState createState() => _AddNotesState();
 }
 
 final myTheme = CustomColor();
 
-class _AddCatatanState extends State<AddCatatan> {
+class _AddNotesState extends State<AddNotes> {
 
   String idUser='1';
   late String gambar, judul, deskripsi, link;
