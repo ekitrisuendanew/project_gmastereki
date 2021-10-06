@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CustomColor {
+class NewColor {
 
-  static final CustomColor _instance = CustomColor._internal();
-  static final _primary = 0xffF66257;
+  static final NewColor _instance = NewColor._internal();
+  static const _primary = 0xffF66257;
 
-  factory CustomColor() {
+  factory NewColor() {
     return _instance;
   }
 
-  CustomColor._internal();
+  NewColor._internal();
 
-  final ColorSwatch colors = ColorSwatch(_primary, const {
-    Color1 : Color(0xff5DA9DD),
+  final ColorSwatch colors = const ColorSwatch(_primary, {
+    color1 : Color(0xff5DA9DD),
   });
 
 }
 
-const String Color1 = "Color1";
+const String color1 = "Color1";

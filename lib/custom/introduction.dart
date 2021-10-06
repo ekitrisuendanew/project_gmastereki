@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:project_gmastereki/menu/notes.dart';
+import 'package:project_gmastereki/custom/bottom_navigation.dart';
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class _IntroductionState extends State<Introduction> {
 
   void _onIntroEnd(context) {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-        builder: (context)=>const Notes()
+        builder: (context)=>const BottomNavigation()
     ), (route) => false);
   }
 
@@ -55,7 +54,7 @@ class _IntroductionState extends State<Introduction> {
         height: 60,
         child: ElevatedButton(
           child: const Text(
-            'Let\s go right away!',
+            'Lets go right away!',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
           onPressed: () => _onIntroEnd(context),

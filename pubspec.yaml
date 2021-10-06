@@ -44,6 +44,17 @@ dependencies:
   webview_flutter: ^2.0.14
   flutter_speed_dial: ^4.4.0+1
   introduction_screen: 2.1.0
+  flutter_local_notifications: ^8.2.0
+  flutter_local_notifications_platform_interface: ^4.0.1
+  platform: ^3.0.2
+  timezone: ^0.8.0
+  device_info: ^2.0.2
+  path_provider: ^2.0.5
+  flutter_native_timezone: ^2.0.0
+  rxdart: ^0.27.2
+  sqflite: ^2.0.0+4
+  image_picker: ^0.8.4+2
+
 
 #  url_launcher: ^5.5.0
 #  image_picker: ^0.6.7+12

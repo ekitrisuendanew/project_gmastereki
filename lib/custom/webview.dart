@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:project_gmastereki/custom/custom_color.dart';
+import 'package:project_gmastereki/custom/new_color.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-final myTheme = CustomColor();
+final myTheme = NewColor();
 
 class WebView1 extends StatefulWidget {
   final String link;
-  WebView1(this.link);
+  const WebView1(this.link, {Key? key}) : super(key: key);
   @override
   _WebView1State createState() => _WebView1State();
 }
@@ -40,7 +40,7 @@ class _WebView1State extends State<WebView1> {
             },
           ),
         ),
-        backgroundColor: myTheme.colors[Color1],
+        backgroundColor: myTheme.colors[color1],
         elevation: 0.0,
       ),
       body: Stack(

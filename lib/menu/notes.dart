@@ -2,43 +2,45 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:project_gmastereki/add_catatan.dart';
-import 'package:project_gmastereki/custom/custom_color.dart';
-import 'package:project_gmastereki/model/catatan_model.dart';
+import 'package:project_gmastereki/menu/notes/add_note.dart';
+import 'package:project_gmastereki/custom/new_color.dart';
+import 'package:project_gmastereki/menu/notes/edit_note.dart';
+import 'package:project_gmastereki/model_network/notes_model.dart';
 import 'package:project_gmastereki/network/network.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_gmastereki/webview.dart';
+import 'package:project_gmastereki/custom/webview.dart';
 import 'package:readmore/readmore.dart';
 
-class Catatan extends StatefulWidget {
-  const Catatan({Key? key}) : super(key: key);
+class Notes extends StatefulWidget {
+  const Notes({Key? key}) : super(key: key);
 
   @override
-  _CatatanState createState() => _CatatanState();
+  _NotesState createState() => _NotesState();
 }
 
-final myTheme = CustomColor();
+final myTheme = NewColor();
 
-class _CatatanState extends State<Catatan> {
-  List<CatatanModel> list = [];
+class _NotesState extends State<Notes> {
+  List<NotesModel> list = [];
   String idUser = '1';
 
   NetworkUrl networkUrl = NetworkUrl();
 
   var loading = false;
 
-  Future getCatatan() async {
+  Future getNotes2()async{}
+  Future getNotes() async {
     list.clear();
     setState(() {
       loading = true;
     });
     try {
-      final response = await http.get(Uri.parse(NetworkUrl.getCatatan(idUser)));
+      final response = await http.get(Uri.parse(NetworkUrl.getNote(idUser)));
       if (response.statusCode == 200) {
         Iterable it = jsonDecode(response.body);
         setState(() {
           for (Map i in it) {
-            list.add(CatatanModel.fromJson(i));
+            list.add(NotesModel.fromJson(i));
           }
           loading = false;
         });
@@ -48,13 +50,14 @@ class _CatatanState extends State<Catatan> {
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
     }
   }
 
   _deleteCatatan(String id) async {
     final response =
-        await http.post(Uri.parse(NetworkUrl.deleteCatatan()), body: {
+        await http.post(Uri.parse(NetworkUrl.deleteNote()), body: {
       "id": id,
       "idUser": idUser,
     });
@@ -64,7 +67,7 @@ class _CatatanState extends State<Catatan> {
     if (value == 1) {
       setState(() {
         Navigator.pop(context);
-        getCatatan();
+        getNotes();
         detailToast(message);
       });
     } else {
@@ -78,13 +81,13 @@ class _CatatanState extends State<Catatan> {
       builder: (context) {
         return Dialog(
           child: ListView(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             shrinkWrap: true,
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "Anda yakin ingin menghapus Catatan ini?",
+                  "Are you sure you want to delete this Note?",
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -100,7 +103,7 @@ class _CatatanState extends State<Catatan> {
                     },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text("Tidak"),
+                      child: Text("No"),
                     ),
                   ),
                   const SizedBox(
@@ -112,7 +115,7 @@ class _CatatanState extends State<Catatan> {
                     },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text("Ya"),
+                      child: Text("Yes"),
                     ),
                   ),
                 ],
@@ -136,17 +139,16 @@ class _CatatanState extends State<Catatan> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    getNotes();
     super.initState();
-    getCatatan();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Catatan'),
-        backgroundColor: myTheme.colors[Color1],
+        title: const Text('Notes'),
+        backgroundColor: myTheme.colors[color1],
         elevation: 2.0,
       ),
       body: ListView.builder(
@@ -161,26 +163,26 @@ class _CatatanState extends State<Catatan> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    b.gambar=='-' ? const SizedBox() :
+                    b.image=='-' ? const SizedBox() :
                     Image.network(
-                      'https://ekitrisuenda.com/project_gmastereki/images/'+b.gambar,
+                      'https://ekitrisuenda.com/project_gmastereki/images/'+b.image,
                       fit: BoxFit.fill,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                      b.judul,
+                      b.title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: myTheme.colors[Color1],
+                        color: myTheme.colors[color1],
                       ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     ReadMoreText(
-                      b.deskripsi,
+                      b.description,
                       trimLines: 2,
                       style: const TextStyle(color: Colors.black),
                       colorClickableText: Colors.blue,
@@ -202,7 +204,7 @@ class _CatatanState extends State<Catatan> {
                         b.link,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: myTheme.colors[Color1],
+                          color: myTheme.colors[color1],
                         ),
                       ),
                     ),
@@ -210,47 +212,33 @@ class _CatatanState extends State<Catatan> {
                       height: 10,
                     ),
                     Text(
-                      b.created_ad,
+                      b.createdAt,
                       style: const TextStyle(fontSize: 10, color: Colors.grey),
                     ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ButtonTheme(
-                          child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            onPressed: () {},
-                            color: myTheme.colors[Color1],
-                            textColor: Colors.white,
-                            child: const Center(
-                              child: Icon(
-                                Icons.edit,
-                                size: 17,
+                        ElevatedButton.icon(
+                          onPressed: () =>
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditNote(b,getNotes),
                               ),
                             ),
-                          ),
+                          icon: const Icon(Icons.edit, size: 18),
+                          label: const Text("Edit"),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
-                        ButtonTheme(
-                          child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            onPressed: () {
-                              dialogDeleteCatatan(b.id);
-                            },
-                            color: myTheme.colors[Color1],
-                            textColor: Colors.white,
-                            child: const Center(
-                              child: Icon(
-                                Icons.delete,
-                                size: 17,
-                              ),
-                            ),
-                          ),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            dialogDeleteCatatan(b.id);
+                          },
+                          icon: const Icon(Icons.delete, size: 18),
+                          label: const Text("Delete"),
                         ),
                       ],
                     ),
@@ -262,31 +250,15 @@ class _CatatanState extends State<Catatan> {
         },
       ),
       floatingActionButton: SpeedDial(
-        icon: Icons.settings,
-          children: [
-            SpeedDialChild(
-              child: const Icon(Icons.add),
-              label: 'Add Catatan',
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddCatatan(getCatatan),
-                  ),
-                );
-              }),
-            SpeedDialChild(
-                child: const Icon(Icons.search),
-                label: 'Search Catatan',
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddCatatan(getCatatan),
-                    ),
-                  );
-                }),
-          ]
+        icon: Icons.add,
+          onPress: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddNote(getNotes),
+              ),
+            );
+          }
       ),
     );
   }
