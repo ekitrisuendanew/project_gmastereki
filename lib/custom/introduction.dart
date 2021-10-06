@@ -40,21 +40,12 @@ class _IntroductionState extends State<Introduction> {
     return IntroductionScreen(
       key: introKey,
       globalBackgroundColor: Colors.white,
-      globalHeader: Align(
-        alignment: Alignment.topRight,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 16, right: 16),
-            child: _buildImage('img4.jpg', 100),
-          ),
-        ),
-      ),
       globalFooter: SizedBox(
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
           child: const Text(
-            'Lets go right away!',
+            'Start right away!',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
           onPressed: () => _onIntroEnd(context),
@@ -62,45 +53,17 @@ class _IntroductionState extends State<Introduction> {
       ),
       pages: [
         PageViewModel(
-          title: "Fractional shares",
+          title: "Notes",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
-          image: _buildImage('img1.jpg'),
+          "write notes",
+          image: _buildImage('note.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
+          title: "Schedule",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
-          image: _buildImage('img2.jpg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Kids and teens",
-          body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-          image: _buildImage('img3.jpg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('img4.jpg'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-          ),
+          "write schedule",
+          image: _buildImage('schedule.jpg'),
           decoration: pageDecoration,
         ),
       ],

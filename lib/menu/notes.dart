@@ -148,7 +148,7 @@ class _NotesState extends State<Notes> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
-        backgroundColor: myTheme.colors[color1],
+        backgroundColor: Colors.blue,
         elevation: 2.0,
       ),
       body: ListView.builder(

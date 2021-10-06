@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_gmastereki/custom/new_color.dart';
 import 'package:project_gmastereki/menu/notes.dart';
 import 'package:project_gmastereki/menu/schedules.dart';
-import 'package:project_gmastereki/menu/timetable.dart';
-
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -23,7 +21,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children =
@@ -33,7 +30,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
     ];
 
     return Scaffold(
-
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTappedBar,
@@ -47,12 +43,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.table_rows_outlined),
-            label: 'Timetable',
+            icon: Icon(Icons.schedule),
+            label: 'Schedule',
           ),
         ],
       ),
-
     );
   }
 }

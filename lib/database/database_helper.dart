@@ -25,14 +25,17 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE schedules(
           id INTEGER PRIMARY KEY,
-          name TEXT
+          title TEXT,
+          description TEXT,
+          hour TEXT,
+          minute TEXT
       )
       ''');
   }
 
   Future<List<ScheduleModel>> getSchedules() async {
     Database db = await instance.database;
-    var schedules = await db.query('schedules', orderBy: 'name');
+    var schedules = await db.query('schedules', orderBy: 'id');
     List<ScheduleModel> scheduleList = schedules.isNotEmpty
         ? schedules.map((c) => ScheduleModel.fromMap(c)).toList()
         : [];
@@ -47,12 +50,6 @@ class DatabaseHelper {
   Future<int> remove(int id) async {
     Database db = await instance.database;
     return await db.delete('schedules', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> update(ScheduleModel schedule) async {
-    Database db = await instance.database;
-    return await db.update('schedules', schedule.toMap(),
-        where: "id = ?", whereArgs: [schedule.id]);
   }
 
 }

@@ -42,13 +42,7 @@ class _AddNoteState extends State<AddNote> {
   }
 
   static const List<Color> _kDefaultRainbowColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
     Colors.blue,
-    Colors.indigo,
-    Colors.purple,
   ];
 
   var _image;
@@ -158,9 +152,8 @@ class _AddNoteState extends State<AddNote> {
         String message = data['message'];
         if(valueGet==1){
           widget.reload();
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (context)=>const Notes()
-          ), (route) => false);
+          Navigator.pop(context);
+          Navigator.pop(context);
           createToast(message);
         }else{
           Navigator.pop(context);
@@ -207,7 +200,7 @@ class _AddNoteState extends State<AddNote> {
           children: <Widget>[
             InkWell(
                 onTap: dialogProses,
-                child: _image == null ? Image.asset("assets/foto diri.png",
+                child: _image == null ? Image.asset("assets/img.png",
                   fit: BoxFit.cover,
                 ) : Image.file(_image, fit: BoxFit.cover,)
             ),

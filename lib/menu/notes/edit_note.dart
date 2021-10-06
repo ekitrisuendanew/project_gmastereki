@@ -31,13 +31,7 @@ class _EditNoteState extends State<EditNote> {
   }
 
   static const List<Color> _kDefaultRainbowColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
     Colors.blue,
-    Colors.indigo,
-    Colors.purple,
   ];
 
   check() {
@@ -184,7 +178,7 @@ class _EditNoteState extends State<EditNote> {
                     onPressed: () {
                       check();
                     },
-                    child: const Text("Simpan"),
+                    child: const Text("Save"),
                   ),
                 ],
               ),
