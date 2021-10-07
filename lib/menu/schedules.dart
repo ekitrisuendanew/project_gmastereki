@@ -246,10 +246,9 @@ class _ScheduleState extends State<Schedule> {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    Text(DateFormat("yyyy-MM-dd").format(tgl1), style: const TextStyle(color: Colors.black54)),
+                                    Text(DateFormat( schedule.datepicker).format(tgl1), style: const TextStyle(color: Colors.black54)),
                                   ],
                                 ),
-
                               ],
                             ),
                           ),
