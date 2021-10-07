@@ -27,6 +27,7 @@ class DatabaseHelper {
           id INTEGER PRIMARY KEY,
           title TEXT,
           description TEXT,
+          datepicker TEXT,
           hour TEXT,
           minute TEXT
       )

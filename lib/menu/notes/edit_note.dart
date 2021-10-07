@@ -102,7 +102,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Edit Profile'),
-        backgroundColor: myTheme.colors[color1],
+        backgroundColor: Colors.blue,
         elevation: 2.0,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

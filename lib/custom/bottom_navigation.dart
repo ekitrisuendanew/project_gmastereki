@@ -3,6 +3,7 @@ import 'package:project_gmastereki/custom/new_color.dart';
 import 'package:project_gmastereki/menu/notes.dart';
 import 'package:project_gmastereki/menu/schedules.dart';
 
+
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
   @override
@@ -21,6 +22,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _children =
@@ -30,6 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     ];
 
     return Scaffold(
+
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTappedBar,
@@ -48,6 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
         ],
       ),
+
     );
   }
 }

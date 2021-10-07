@@ -189,7 +189,7 @@ class _AddNoteState extends State<AddNote> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Note"),
-        backgroundColor: myTheme.colors[color1],
+        backgroundColor: Colors.blue,
         elevation: 2.0,
       ),
       body: Form(

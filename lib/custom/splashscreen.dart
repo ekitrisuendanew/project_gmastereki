@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 "assets/logo.png",
                 height: 150,
               ),
-              const SizedBox(height:10,),
+              const SizedBox(height:20,),
               const Text('TO-DO-LIST',style:TextStyle(fontSize: 35,color: Colors.blue,fontFamily: 'Chalkboard',)),
               const SizedBox(height: 30,),
               SizedBox(
