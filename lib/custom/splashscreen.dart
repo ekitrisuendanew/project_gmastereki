@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:project_gmastereki/custom/bottom_navigation.dart';
 import 'dart:async';
 
 import 'package:project_gmastereki/custom/introduction.dart';
+import 'package:project_gmastereki/custom/shared_pref.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,12 +26,27 @@ class _SplashScreenState extends State<SplashScreen> {
   starSplashScreen()async{
     var duration = const Duration(seconds: 5);
     return Timer(duration, (){
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_){
-            return Introduction();
-          })
-      );
+      getPref();
     });
+  }
+
+  var statusIntroduction2;
+
+  getPref()async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      statusIntroduction2 != null ? pref.getString(Pref.statusIntroduction) : 'not yet';
+    });
+    statusIntroduction2 == 'done' ?
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_){
+          return const BottomNavigation();
+        })
+    ):Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_){
+          return const Introduction();
+        })
+    );
   }
 
   static const List<Color> _kDefaultRainbowColors = [

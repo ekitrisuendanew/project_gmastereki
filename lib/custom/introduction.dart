@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:project_gmastereki/custom/bottom_navigation.dart';
+import 'package:project_gmastereki/custom/shared_pref.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
@@ -11,15 +13,29 @@ class Introduction extends StatefulWidget {
 }
 
 class _IntroductionState extends State<Introduction> {
+
+  String idNotif = '1', statusIntroduction ='done';
+
+  savePref(
+      String idNotif,
+      String statusIntoduction,
+      )async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      pref.setString(Pref.idNotif, idNotif);
+      pref.setString(Pref.statusIntroduction, statusIntoduction);
+    });
+  }
+
+
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
+    savePref(idNotif, statusIntroduction);
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
         builder: (context)=>const BottomNavigation()
     ), (route) => false);
   }
-
-
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/$assetName', width: width);

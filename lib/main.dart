@@ -9,7 +9,6 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:project_gmastereki/menu/notification.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
 import 'custom/splashscreen.dart';
 
 const MethodChannel platform = MethodChannel('dexterx.dev/flutter_local_notifications_example');
@@ -97,4 +96,5 @@ class PaddedElevatedButton extends StatelessWidget {
       child: Text(buttonText),
     ),
   );
+
 }

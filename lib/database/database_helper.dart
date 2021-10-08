@@ -25,6 +25,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE schedules(
           id INTEGER PRIMARY KEY,
+          idnotification TEXT,
           title TEXT,
           description TEXT,
           datepicker TEXT,
