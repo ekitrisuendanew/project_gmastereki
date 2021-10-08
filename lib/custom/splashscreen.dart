@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:project_gmastereki/custom/bottom_navigation.dart';
 import 'dart:async';
-
 import 'package:project_gmastereki/custom/introduction.dart';
 import 'package:project_gmastereki/custom/shared_pref.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   getPref()async{
     SharedPreferences pref = await SharedPreferences.getInstance();
     setState(() {
+      statusIntroduction2 = pref.getString(Pref.statusIntroduction);
       statusIntroduction2 != null ? pref.getString(Pref.statusIntroduction) : 'not yet';
     });
     statusIntroduction2 == 'done' ?
